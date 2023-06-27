@@ -1,0 +1,11 @@
+model
+{
+    prior_alpha ~ dunif(0.00000E+00, 10)
+    prior_beta ~ dunif(0.00000E+00, 10)
+    for (i in 1:N) {
+        theta[i] ~ dbeta(prior_alpha, prior_beta)
+        X_dat[i] ~ dbin(theta[i], n_dat[i])
+    }
+    theta_new ~ dbeta(prior_alpha, prior_beta)
+    X_new ~ dbin(theta_new, n_new)
+}
